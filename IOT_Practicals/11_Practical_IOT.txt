@@ -1,0 +1,39 @@
+11. Write a program so it displays the temperature in Fahrenheit as well as the maximum and
+minimum temperatures it has seen.
+
+
+int baselineTemp = 0;
+int celsius = 0;
+int fahrenheit = 0;
+int hfahrenheit = 0;
+int lfahrenheit = 0;
+void setup()
+{
+ pinMode(A0, INPUT);
+ Serial.begin(9600);
+}
+void loop()
+{
+ baselineTemp = 40;
+ 
+ celsius = map(((analogRead(A1) - 20) * 3.04), 0, 1023, -40, 125);
+ 
+ fahrenheit = ((celsius * 9) / 5 + 32);
+ if(fahrenheit>hfahrenheit)
+ {
+ hfahrenheit=fahrenheit;
+ }
+ if(fahrenheit<lfahrenheit)
+ {
+ lfahrenheit=fahrenheit;
+ }
+ Serial.print(fahrenheit);
+ Serial.println(" F : Current Temperature");
+ Serial.println("");
+ Serial.print(hfahrenheit);
+ Serial.println(" F :The Heighest temprature");
+ Serial.print(lfahrenheit);
+ Serial.println(" F : The lowest temprature");
+ Serial.println("");
+ delay(2000);
+ }

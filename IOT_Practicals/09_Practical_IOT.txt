@@ -1,0 +1,28 @@
+9. Write a program to control the color of the LED by turning 3 different potentiometers. One will be read for the value of Red, one for the value of Green, and one for the value of Blue
+
+
+// Define the pins for the RGB LED
+const int redPin = 7;
+const int greenPin = 6;
+const int bluePin = 5;
+// Define the pin for the potentiometer
+const int potPin = A0;
+void setup() {
+ // Set the RGB LED pins as outputs
+ pinMode(redPin, OUTPUT);
+ pinMode(greenPin, OUTPUT);
+ pinMode(bluePin, OUTPUT);
+}
+void loop() {
+ // Read the value from the potentiometer
+ int potValue = analogRead(potPin);
+ // Map the potentiometer value to a range of 0-255
+ int colorValue = map(potValue, 0, 1023, 0, 255);
+ // Set the color of the RGB LED based on the potentiometer value
+ analogWrite(redPin, colorValue);
+ analogWrite(greenPin, colorValue/2);
+ analogWrite(bluePin, colorValue/4);
+ 
+ // Add a small delay to reduce flickering
+ delay(10);
+}

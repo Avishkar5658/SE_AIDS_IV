@@ -1,0 +1,21 @@
+8. Write a program that asks the user for a number and outputs the number squared that is entered
+
+
+// C++ code
+void setup()
+{
+ Serial.begin(9600);
+}
+void loop()
+{
+ int sqrt;
+ if(Serial.available()>0)
+ {
+ int read=Serial.readString().toInt();
+ Serial.print("You Entered:");
+ Serial.println(read);
+ int out=read*read;
+ Serial.print("Square is:");
+ Serial.println(out);
+ }
+}

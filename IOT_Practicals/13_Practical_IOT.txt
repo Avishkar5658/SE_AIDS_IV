@@ -1,0 +1,121 @@
+13. Write a program using piezo element and use it to play a tune after someone knocks
+
+
+float cm=0;
+float inches=0;
+int LEDR=2;
+int LEDB=3;
+int LEDG=4;
+long readultrasonicDistance (int triggerPin, int echoPin)
+{
+pinMode (triggerPin, OUTPUT); // clear the trigger 
+digitalWrite (triggerPin, LOW);
+delay(5000);
+// Sets the trigger pin to HIGH state for 10 microseconds
+digitalWrite(triggerPin, HIGH);
+delay(5000);
+digitalWrite(triggerPin, LOW);
+pinMode (echoPin, INPUT);
+// Reads the echo pin, and returns the sound wave travel time
+return pulseIn(echoPin,HIGH);
+}
+void setup()
+{
+pinMode(LEDR,OUTPUT);
+pinMode(LEDB,OUTPUT);
+pinMode(LEDG,OUTPUT);
+Serial.begin(9600);
+}
+void loop()
+{
+ // measure the ping tine in cm
+cm =0.01723 *readultrasonicDistance (6,5);
+//convert to inches by dividing by 2.34
+if(cm>=0 && cm<50)
+{
+ digitalWrite(LEDR,HIGH);
+ Serial.print("LED= RED, ");
+ delay(500);
+}
+else
+{
+digitalWrite(LEDR,LOW);
+}
+if(cm>=50 && cm<100)
+{
+ digitalWrite(LEDG,HIGH);
+ Serial.print("LED= GREEN, ");
+ delay(5000);
+}
+else
+{
+digitalWrite(LEDG,LOW);
+}
+if(cm>=100 && cm<150)
+{
+ digitalWrite(LEDB,HIGH);
+ Serial.print("LED= BLUE, ");
+ delay(5000);
+}
+else
+{
+digitalWrite(LEDB,LOW);
+}
+if(cm>=150 && cm<200)
+{
+ digitalWrite(LEDR,HIGH);
+ digitalWrite(LEDB,HIGH);
+ digitalWrite(LEDG,HIGH);
+ Serial.print("LED= WHITE, ");
+ delay(5000);
+}
+else
+{
+digitalWrite(LEDR,LOW);
+digitalWrite(LEDG,LOW);
+digitalWrite(LEDB,LOW);
+}
+if(cm>=200 && cm<250)
+{
+ digitalWrite(LEDB,HIGH);
+ digitalWrite(LEDG,HIGH);
+ Serial.print("LED= WHITE, ");
+ delay(5000);
+}
+else
+{
+digitalWrite(LEDG,LOW);
+digitalWrite(LEDB,LOW);
+}
+if(cm>=250 && cm<300)
+{
+ digitalWrite(LEDR,HIGH);
+ digitalWrite(LEDG,HIGH);
+ Serial.print("LED= WHITE, ");
+ delay(5000);
+}
+else
+{
+digitalWrite(LEDR,LOW);
+digitalWrite(LEDG,LOW);
+}
+if(cm>=300 && cm<325)
+{
+ digitalWrite(LEDR,HIGH);
+ digitalWrite(LEDB,HIGH);
+ Serial.print("LED= WHITE, ");
+ delay(5000);
+}
+else
+{
+digitalWrite(LEDR,LOW);
+digitalWrite(LEDG,LOW);
+}
+inches= (cm/2.54);
+Serial.print (cm);
+Serial.print(" CM, ");
+Serial.print (inches);
+Serial.print(" IN ");
+Serial.println();
+delay(5000); // wait for 100 millisecond(s)
+}

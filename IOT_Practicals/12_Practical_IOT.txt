@@ -1,0 +1,21 @@
+12. Write a program to show the temperature and shows a graph of the recent measurements
+
+
+#define fsrpin A0
+#define buzzer 9
+int fsrreading;
+void setup() {
+ Serial.begin(9600);
+}
+void loop() {
+ fsrreading = analogRead(fsrpin);
+ Serial.println(fsrreading);
+ if(fsrreading>200){
+ buzzerAlert();
+ } 
+}
+void buzzerAlert() {
+ // Activate the buzzer for a specific duration
+ tone(9, 220, 100);
+ delay(200);
+}
